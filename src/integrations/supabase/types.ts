@@ -14,16 +14,310 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bairro: string | null
+          bi_document_url: string | null
+          bi_number: string | null
+          created_at: string
+          full_name: string
+          id: string
+          municipio: string | null
+          nif: string | null
+          nif_document_url: string | null
+          phone: string | null
+          provincia: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bairro?: string | null
+          bi_document_url?: string | null
+          bi_number?: string | null
+          created_at?: string
+          full_name: string
+          id: string
+          municipio?: string | null
+          nif?: string | null
+          nif_document_url?: string | null
+          phone?: string | null
+          provincia?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bairro?: string | null
+          bi_document_url?: string | null
+          bi_number?: string | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          municipio?: string | null
+          nif?: string | null
+          nif_document_url?: string | null
+          phone?: string | null
+          provincia?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      properties: {
+        Row: {
+          address: string
+          area_total: number | null
+          area_util: number | null
+          bairro: string
+          bathrooms: number | null
+          bedrooms: number | null
+          created_at: string
+          description: string
+          featured: boolean | null
+          garage_spaces: number | null
+          has_garage: boolean | null
+          id: string
+          latitude: number | null
+          longitude: number | null
+          municipio: string
+          owner_id: string
+          price: number
+          property_type: Database["public"]["Enums"]["property_type"]
+          provincia: string
+          status: Database["public"]["Enums"]["property_status"]
+          title: string
+          transaction_type: Database["public"]["Enums"]["transaction_type"]
+          updated_at: string
+          views_count: number | null
+        }
+        Insert: {
+          address: string
+          area_total?: number | null
+          area_util?: number | null
+          bairro: string
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string
+          description: string
+          featured?: boolean | null
+          garage_spaces?: number | null
+          has_garage?: boolean | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          municipio: string
+          owner_id: string
+          price: number
+          property_type: Database["public"]["Enums"]["property_type"]
+          provincia: string
+          status?: Database["public"]["Enums"]["property_status"]
+          title: string
+          transaction_type: Database["public"]["Enums"]["transaction_type"]
+          updated_at?: string
+          views_count?: number | null
+        }
+        Update: {
+          address?: string
+          area_total?: number | null
+          area_util?: number | null
+          bairro?: string
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string
+          description?: string
+          featured?: boolean | null
+          garage_spaces?: number | null
+          has_garage?: boolean | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          municipio?: string
+          owner_id?: string
+          price?: number
+          property_type?: Database["public"]["Enums"]["property_type"]
+          provincia?: string
+          status?: Database["public"]["Enums"]["property_status"]
+          title?: string
+          transaction_type?: Database["public"]["Enums"]["transaction_type"]
+          updated_at?: string
+          views_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "properties_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      property_images: {
+        Row: {
+          created_at: string
+          display_order: number | null
+          id: string
+          image_url: string
+          is_cover: boolean | null
+          property_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image_url: string
+          is_cover?: boolean | null
+          property_id: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image_url?: string
+          is_cover?: boolean | null
+          property_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_images_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      property_visits: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          property_id: string
+          status: string | null
+          updated_at: string
+          visit_date: string
+          visitor_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          property_id: string
+          status?: string | null
+          updated_at?: string
+          visit_date: string
+          visitor_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          property_id?: string
+          status?: string | null
+          updated_at?: string
+          visit_date?: string
+          visitor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_visits_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "property_visits_visitor_id_fkey"
+            columns: ["visitor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reviews: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          property_id: string
+          rating: number
+          reviewer_id: string
+          updated_at: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          property_id: string
+          rating: number
+          reviewer_id: string
+          updated_at?: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          property_id?: string
+          rating?: number
+          reviewer_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_reviewer_id_fkey"
+            columns: ["reviewer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "proprietario" | "cliente" | "corretor" | "gestor"
+      property_status: "disponivel" | "alugado" | "vendido" | "pendente"
+      property_type: "casa" | "apartamento" | "loja" | "terreno" | "escritorio"
+      transaction_type: "venda" | "arrendamento" | "temporada"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +444,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["proprietario", "cliente", "corretor", "gestor"],
+      property_status: ["disponivel", "alugado", "vendido", "pendente"],
+      property_type: ["casa", "apartamento", "loja", "terreno", "escritorio"],
+      transaction_type: ["venda", "arrendamento", "temporada"],
+    },
   },
 } as const
